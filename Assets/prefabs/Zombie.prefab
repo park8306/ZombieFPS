@@ -46,12 +46,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombie: 0
+  attackPosition: {fileID: 0}
   detecedDistance: 7.2
   attackDistance: 0.51
   speed: 0.7
   attackTime: 0.5
   attackFullTime: 1
   power: 3
+  attackArange: 0.3
 --- !u!1 &2827171953233279895
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +491,6 @@ GameObject:
   - component: {fileID: 2822592516865828363}
   - component: {fileID: 2767590916754381341}
   - component: {fileID: 2826743600193035947}
-  - component: {fileID: 2826743600193035948}
   m_Layer: 0
   m_Name: FreeZombie
   m_TagString: Untagged
@@ -548,20 +549,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!136 &2826743600193035948
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2827818261095777247}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.15
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &2827825046580934533
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,6 @@ public class ZomebieAction : MonoBehaviour
     public ZombieState zombie;
 
     Func<IEnumerator> currentFsm;
-
     Coroutine fsmHandle;
     [SerializeField]
     Transform attackPosition;
@@ -69,7 +68,7 @@ public class ZomebieAction : MonoBehaviour
         {
             Vector3 toPlayerDirection = player.transform.position - transform.position;
             toPlayerDirection.Normalize();
-            transform.LookAt(toPlayerDirection);
+            transform.LookAt(player.transform);
             transform.Translate(toPlayerDirection * speed * Time.deltaTime, Space.World);
             if (Vector3.Distance(transform.position, player.transform.position) < attackDistance)
             {

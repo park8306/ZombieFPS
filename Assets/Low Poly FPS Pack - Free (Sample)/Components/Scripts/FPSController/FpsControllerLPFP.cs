@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -10,8 +12,15 @@ namespace FPSControllerLPFP
     [RequireComponent(typeof(AudioSource))]
     public class FpsControllerLPFP : MonoBehaviour
     {
+
+        public static FpsControllerLPFP instance;
+        private void Awake()
+        {
+            instance = this;
+            playerHP = playerMaxHP;
+        }
 #pragma warning disable 649
-		[Header("Arms")]
+        [Header("Arms")]
         [Tooltip("The transform component that holds the gun camera."), SerializeField]
         private Transform arms;
 
@@ -48,6 +57,13 @@ namespace FPSControllerLPFP
         [Tooltip("Minimum rotation of the arms and camera on the x axis."),
          SerializeField]
         private float minVerticalAngle = -90f;
+
+        public float playerMaxHP = 100f;
+        public float playerHP;
+        public void TakeHit(float power)
+        {
+            playerHP -= power;
+        }
 
         [Tooltip("Maximum rotation of the arms and camera on the axis."),
          SerializeField]

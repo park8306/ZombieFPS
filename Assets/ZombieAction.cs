@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class ZomebieAction : MonoBehaviour
+public class ZombieAction : MonoBehaviour
 {
     Animator zombieAnimator;
     FpsControllerLPFP player;
@@ -23,6 +23,15 @@ public class ZomebieAction : MonoBehaviour
     [SerializeField]
     Transform attackPosition;
     // 좀비의 Fsm을 만들자
+    public static ZombieAction instance;
+    public float zombieMaxHP = 20;
+    public float zombieHP;
+    Vector3 lookAtPosition;
+    private void Awake()
+    {
+        instance = this;
+        zombieHP = zombieMaxHP;
+    }
     private IEnumerator Start()
     {
         player = FpsControllerLPFP.instance;
@@ -32,11 +41,48 @@ public class ZomebieAction : MonoBehaviour
         {
             var previousFSM = CurrentFsm;
             fsmHandle = StartCoroutine(CurrentFsm());
+            //if (fsmHandle == null && previousFSM == CurrentFsm)
+            //{
+            //    yield return null;
+            //}
             while (fsmHandle != null)
             {
                 yield return null;
             }
         }
+    }
+    private void Update()
+    {
+        lookAtPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+    }
+
+    internal void TakeHit(float bulletPower)
+    {
+        if (zombieHP <= 0)
+        {
+            return;
+        }
+        zombieHP -= bulletPower;
+        // 
+        if (fsmHandle != null)
+        {
+            StopCoroutine(fsmHandle);
+        }
+        if (zombieHP > 0)
+        {
+            currentFsm = IdleFSM;
+        }
+        else
+        {
+            currentFsm = DeathFSM;
+        }
+    }
+    public float deathTime = 0.5f;
+    private IEnumerator DeathFSM()
+    {
+        PlayAnimation("Death");
+        yield return new WaitForSeconds(deathTime);
+        Destroy(gameObject);
     }
 
     public Func<IEnumerator> CurrentFsm
@@ -54,7 +100,7 @@ public class ZomebieAction : MonoBehaviour
     private IEnumerator IdleFSM()
     {
         PlayAnimation("Idle");
-        while (Vector3.Distance(transform.position, player.transform.position) > detecedDistance)
+        while (Vector3.Distance(transform.position, lookAtPosition) > detecedDistance)
         {
             yield return null;
         }
@@ -66,11 +112,11 @@ public class ZomebieAction : MonoBehaviour
         PlayAnimation("Walk");
         while (true)
         {
-            Vector3 toPlayerDirection = player.transform.position - transform.position;
+            Vector3 toPlayerDirection = lookAtPosition - transform.position;
             toPlayerDirection.Normalize();
-            transform.LookAt(player.transform);
+            transform.LookAt(lookAtPosition);
             transform.Translate(toPlayerDirection * speed * Time.deltaTime, Space.World);
-            if (Vector3.Distance(transform.position, player.transform.position) < attackDistance)
+            if (Vector3.Distance(transform.position, lookAtPosition) < attackDistance)
             {
                 CurrentFsm = AttackFSM;
                 yield break;

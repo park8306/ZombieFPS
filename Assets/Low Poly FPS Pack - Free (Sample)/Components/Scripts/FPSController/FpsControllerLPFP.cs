@@ -12,7 +12,10 @@ namespace FPSControllerLPFP
     [RequireComponent(typeof(AudioSource))]
     public class FpsControllerLPFP : MonoBehaviour
     {
+        public FpsControllerLPFP()
+        {
 
+        }
         public static FpsControllerLPFP instance;
         private void Awake()
         {
@@ -62,6 +65,10 @@ namespace FPSControllerLPFP
         public float playerHP;
         public void TakeHit(float power)
         {
+            if (playerHP <= 0)
+            {
+                return;
+            }
             playerHP -= power;
         }
 

@@ -185,12 +185,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ff3ea705a4a7244a59eef82e75c660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyAfter: 5
-  destroyOnImpact: 1
-  minDestroyTime: 0.01
-  maxDestroyTime: 0.05
-  metalImpactPrefabs:
-  - {fileID: 4458509032938956, guid: 79927c6543a058b4383885fac101fe2e, type: 3}
+  destroyAfter: 0
+  destroyOnImpact: 0
+  minDestroyTime: 0
+  maxDestroyTime: 0
+  metalImpactPrefabs: []
+  bulletPower: 5
 --- !u!1 &1231345400216816
 GameObject:
   m_ObjectHideFlags: 0

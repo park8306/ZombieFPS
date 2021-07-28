@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 868853166469122011}
   m_Layer: 8
   m_Name: Assault_Rifle_01_FPSController
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -245,7 +245,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977311745255838237}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -399,9 +399,11 @@ MonoBehaviour:
   runningSpeed: 9
   movementSmoothness: 0.125
   jumpForce: 35
-  mouseSensitivity: 7
+  mouseSensitivity: 3.5
   rotationSmoothness: 0.05
   minVerticalAngle: -90
+  playerMaxHP: 100
+  playerHP: 0
   maxVerticalAngle: 90
   input:
     rotateX: Mouse X
@@ -5400,7 +5402,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 294f8fd558aa0d1488d4997453398cf0, type: 2}
-  - {fileID: 2100000, guid: 294f8fd558aa0d1488d4997453398cf0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6007,7 +6008,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977895226541057023}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.8527, z: 0.7841}
+  m_LocalPosition: {x: -0, y: -0.945, z: 0.608}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 974835243652783439}
@@ -10801,7 +10802,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: b0ea9aa64da8c76498ef3b008d0cca1b, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11421,7 +11421,7 @@ MonoBehaviour:
   currentAmmoText: {fileID: 864745817193571539}
   totalAmmoText: {fileID: 865658154134681927}
   Prefabs:
-    bulletPrefab: {fileID: 4879702113200764, guid: 5953171a59c27394e9ad5cbb564affa8, type: 3}
+    bulletPrefab: {fileID: 4879702113200764, guid: 034fd738fed876c4a8e1adc1a5d22993, type: 3}
     casingPrefab: {fileID: 4420745226056240, guid: 7be59128a5ee3424faf33d7a408c0b2e, type: 3}
     grenadePrefab: {fileID: 4191440083646698, guid: 7b04fe350ed10a741a1e245447860d9e, type: 3}
   Spawnpoints:
@@ -12724,7 +12724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1048136020557638013
 RectTransform:
   m_ObjectHideFlags: 0

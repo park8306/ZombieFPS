@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33417058950040530}
   - component: {fileID: 23961821767608902}
   - component: {fileID: 1681452071438033009}
+  - component: {fileID: 2444366222324754048}
   m_Layer: 0
   m_Name: Big_Bullet
   m_TagString: Untagged
@@ -90,8 +91,26 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079779283560710}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.01
   m_Center: {x: -2.3283064e-10, y: 0.008117119, z: -0.000000013969839}
+--- !u!114 &2444366222324754048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079779283560710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02ff3ea705a4a7244a59eef82e75c660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyAfter: 0
+  destroyOnImpact: 0
+  minDestroyTime: 0
+  maxDestroyTime: 0
+  metalImpactPrefabs: []
+  bulletPower: 5

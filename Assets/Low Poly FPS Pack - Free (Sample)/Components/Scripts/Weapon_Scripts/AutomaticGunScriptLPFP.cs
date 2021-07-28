@@ -402,14 +402,12 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 						}
 					}
 				}
-
 				//Spawn bullet from bullet spawnpoint
-				var bullet = (Transform)Instantiate (
+				var bullet = Instantiate (
 					Prefabs.bulletPrefab,
 					Spawnpoints.bulletSpawnPoint.transform.position,
 					Spawnpoints.bulletSpawnPoint.transform.rotation);
 
-				//Add velocity to the bullet
 				bullet.GetComponent<Rigidbody>().velocity = 
 					bullet.transform.forward * bulletForce;
 				
@@ -417,6 +415,8 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 				Instantiate (Prefabs.casingPrefab, 
 					Spawnpoints.casingSpawnPoint.transform.position, 
 					Spawnpoints.casingSpawnPoint.transform.rotation);
+				AudioSource a = GetComponent<AudioSource>();
+				a.spatialBlend = 0;
 			}
 		}
 
@@ -425,7 +425,7 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 		{
 			anim.SetTrigger ("Inspect");
 		}
-
+		
 		//Toggle weapon holster when E key is pressed
 		if (Input.GetKeyDown (KeyCode.E) && !hasBeenHolstered) 
 		{
@@ -491,7 +491,6 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 			anim.SetBool ("Run", false);
 		}
 	}
-
 	private IEnumerator GrenadeSpawnDelay () {
 		
 		//Wait for set amount of time before spawning grenade

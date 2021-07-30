@@ -20,7 +20,7 @@ public class ZombieAction : MonoBehaviour
     }
     public ZombieState zombie;
 
-    Func<IEnumerator> currentFsm;
+    Func<IEnumerator> m_currentFsm;
     Coroutine fsmHandle;
     [SerializeField]
     Transform attackPosition;
@@ -87,10 +87,10 @@ public class ZombieAction : MonoBehaviour
 
     public Func<IEnumerator> CurrentFsm
     {
-        get { return currentFsm; }
+        get { return m_currentFsm; }
         set
         {
-            currentFsm = value;
+            m_currentFsm = value;
             fsmHandle = null;
         }
     }

@@ -1,9 +1,8 @@
-﻿using FPSControllerLPFP;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 
 public class ZombieAction : MonoBehaviour
 {
@@ -29,10 +28,15 @@ public class ZombieAction : MonoBehaviour
     public float zombieMaxHP = 20;
     public float zombieHP;
     Vector3 lookAtPosition;
+
+    // 감지하는 범위를 랜덤으로 정하자
+    float detecedDistance;
+    public float attackDistance = 10;
     private void Awake()
     {
         instance = this;
         zombieHP = zombieMaxHP;
+        detecedDistance = Random.Range(30f, 50f);
     }
     private IEnumerator Start()
     {
@@ -94,9 +98,6 @@ public class ZombieAction : MonoBehaviour
             fsmHandle = null;
         }
     }
-
-    public float detecedDistance = 50;
-    public float attackDistance = 10;
 
     private IEnumerator IdleFSM()
     {

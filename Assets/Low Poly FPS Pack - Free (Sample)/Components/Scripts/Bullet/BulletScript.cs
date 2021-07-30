@@ -19,10 +19,10 @@ public class BulletScript : MonoBehaviour {
 	RaycastHit hit;
 	public float maxDistance = 1;
 	public LayerMask layerMask;
-
-	private void Update()
+	
+	private void FixedUpdate()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out hit, maxDistance, layerMask))
+		if (Physics.Raycast(transform.position, transform.forward, out hit, maxDistance, layerMask))
         {
 			hit.transform.GetComponent<ZombieAction>().TakeHit(bulletPower);
 			Debug.Log("레이케스트 좀비 맞음");
@@ -44,6 +44,7 @@ public class BulletScript : MonoBehaviour {
     {
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(transform.position, gizmosSize);
+		Gizmos.DrawRay(new Ray(transform.position, transform.forward * maxDistance));
     }
     public float bulletPower = 5f;
 	//private void OnTriggerEnter(Collider other)

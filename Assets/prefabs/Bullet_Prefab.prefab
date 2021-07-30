@@ -187,7 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyAfter: 5
   metalImpactPrefabs: []
-  maxDistance: 3
+  maxDistance: 5
   layerMask:
     serializedVersion: 2
     m_Bits: 64

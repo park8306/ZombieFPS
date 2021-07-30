@@ -12,8 +12,10 @@ public class ZombieAction : MonoBehaviour
     public enum ZombieState
     {
         None,
+        Idle,
         Walk,
         Attack,
+        TakeHit,
         Death,
     }
     public ZombieState zombie;
@@ -41,23 +43,20 @@ public class ZombieAction : MonoBehaviour
         {
             var previousFSM = CurrentFsm;
             fsmHandle = StartCoroutine(CurrentFsm());
-            //if (fsmHandle == null && previousFSM == CurrentFsm)
-            //{
-            //    yield return null;
-            //}
+            if (fsmHandle == null && previousFSM == CurrentFsm)
+            {
+                yield return null;
+            }
             while (fsmHandle != null)
             {
                 yield return null;
             }
         }
     }
-    private void Update()
-    {
-        lookAtPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-    }
 
     internal void TakeHit(float bulletPower)
     {
+        zombie = ZombieState.TakeHit;
         if (zombieHP <= 0)
         {
             return;
@@ -70,16 +69,17 @@ public class ZombieAction : MonoBehaviour
         }
         if (zombieHP > 0)
         {
-            currentFsm = IdleFSM;
+            CurrentFsm = IdleFSM;
         }
         else
         {
-            currentFsm = DeathFSM;
+            CurrentFsm = DeathFSM;
         }
     }
-    public float deathTime = 0.5f;
+    public float deathTime = 3f;
     private IEnumerator DeathFSM()
     {
+        zombie = ZombieState.Death;
         PlayAnimation("Death");
         yield return new WaitForSeconds(deathTime);
         Destroy(gameObject);
@@ -97,18 +97,26 @@ public class ZombieAction : MonoBehaviour
 
     public float detecedDistance = 50;
     public float attackDistance = 10;
+
     private IEnumerator IdleFSM()
     {
+        zombie = ZombieState.Idle;
         PlayAnimation("Idle");
         while (Vector3.Distance(transform.position, lookAtPosition) > detecedDistance)
         {
             yield return null;
         }
-        currentFsm = ChaseFSM;
+        CurrentFsm = ChaseFSM;
+    }
+
+    private void Update()
+    {
+        lookAtPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
     }
     public float speed = 0.7f;
     private IEnumerator ChaseFSM()
     {
+        zombie = ZombieState.Walk;
         PlayAnimation("Walk");
         while (true)
         {
@@ -130,6 +138,7 @@ public class ZombieAction : MonoBehaviour
     public float attackArange = 0.3f;
     private IEnumerator AttackFSM()
     {
+        zombie = ZombieState.Attack;
         PlayAnimation("Attack");
         yield return new WaitForSeconds(attackTime);
         var colliders = Physics.OverlapSphere(attackPosition.position, attackArange);

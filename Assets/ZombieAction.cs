@@ -36,7 +36,7 @@ public class ZombieAction : MonoBehaviour
     {
         instance = this;
         zombieHP = zombieMaxHP;
-        detecedDistance = Random.Range(30f, 50f);
+        detecedDistance = Random.Range(10f, 15f);
     }
     private IEnumerator Start()
     {
@@ -85,6 +85,7 @@ public class ZombieAction : MonoBehaviour
     {
         zombie = ZombieState.Death;
         PlayAnimation("Death");
+        GameInfo.instance.score += 100;
         yield return new WaitForSeconds(deathTime);
         Destroy(gameObject);
     }
